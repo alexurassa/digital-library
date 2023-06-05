@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "library.apps.LibraryConfig",
     "accounts.apps.AccountsConfig",
+    "shared.apps.SharedConfig",
 ]
 
 MIDDLEWARE = [
@@ -64,11 +65,17 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {},
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "dit_digital_library",
+        "PORT": 3306,
+        "USER": "root",
+        "PASSWORD": "Alex@mysql23"
+    },
     "backup": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
 }
 
 
