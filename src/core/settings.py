@@ -42,6 +42,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "core.urls"
 
+AUTH_USER_MODEL = "accounts.User"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -70,7 +72,7 @@ DATABASES = {
         "NAME": "dit_digital_library",
         "PORT": 3306,
         "USER": "root",
-        "PASSWORD": "Alex@mysql23"
+        "PASSWORD": "Alex@mysql23",
     },
     "backup": {
         "ENGINE": "django.db.backends.sqlite3",
