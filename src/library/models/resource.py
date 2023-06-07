@@ -3,7 +3,8 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from shared.mixins import CustomIdModelMixin
-from ..models import Author, ResourceCategory
+from .author import Author
+from .resource_category import ResourceCategory
 
 
 class Resource(CustomIdModelMixin):
@@ -12,7 +13,7 @@ class Resource(CustomIdModelMixin):
     class Meta:
         verbose_name = _("resource")
         verbose_name_plural = _("resources")
-        ordering = ["title", ""]
+        ordering = ["title", "-registered_timestamp"]
 
     title = models.CharField(_("title"), max_length=100)
     published_date = models.DateField(_("published date"), default=timezone.now)
