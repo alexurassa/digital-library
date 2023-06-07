@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+
+<!-- title -->
+{% block title %} Register an Account {% endblock title %}
+
+<!-- content -->
+{% block content_root %}
+
+<section class="d-flex justify-content-center align-items-center">
+  <div class="card">
+    <div class="card-body">
+      <div class="h3 mb-3">Create your DIT Library Account</div>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in register_form %}
+        <div class="row row-cols-2 mb-3">
+          <div class="col">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          </div>
+
+          <div class="col">
+            {{ field }}
+
+            <!-- errors -->
+            {% if field.errors %}
+            <div class="field-errors">
+              {% for error in field.errors %}
+              <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">
+          Register and Account
+        </button>
+      </form>
+
+      <p>
+        I am registered?
+        <a href="{% url 'accounts:login' %}">Login</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% endblock content_root %}
