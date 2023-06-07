@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {% include "styles.html" %}
+
+    <title>{% block title %} {% endblock title %}</title>
+  </head>
+  <body>
+    <section class="page-root vh-100">
+      <header>{% include 'navbar.html' %}</header>
+
+      <!-- content root -->
+      <section class="main-content-root min-vh-100 container-fluid mt-5 pt-5">
+        {% block content_root %} {% endblock content_root %}
+      </section>
+
+      <!-- footer -->
+      <section class="footer-section">
+        {% include 'footer.html' %}
+      </section>
+
+      <!-- messages -->
+      {% include 'messages.html' %}
+
+    </section>
+  </body>
+</html>
+
+{% include "scripts.html" %}

@@ -1,0 +1,55 @@
+<nav
+  class="navbar navbar-expand-sm fixed-top top-0 border-bottom border-dark-subtle shadow shadow-sm px-3 bg-white"
+  id="app-navbar"
+>
+  <div class="navbar-brand">Digital Library</div>
+
+  <button
+    class="navbar-toggler"
+    data-bs-toggle="collapse"
+    data-bs-target="#main-navbar"
+    aria-expanded="false"
+    aria-label="Toggle navigation links"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ms-auto me-3">
+      <li class="nav-item ms-3">Books</li>
+      <li class="nav-item ms-3 dropdown-center">
+        <span
+          class="dropdown-toggle"
+          data-bs-toggle="dropdown"
+          role="button"
+          aria-expanded="false"
+          >Account</span
+        >
+        <ul class="dropdown-menu">
+          {% if request.user.is_authenticated %}
+          <div class="dropdown-divider"></div>
+          <li class="dropdown-item">
+            <a href="{% url 'accounts:logout' %}" class="dropdown-link">
+              Logout
+            </a>
+          </li>
+          {% else %}
+          <li class="dropdown-item">
+            <a href="{% url 'accounts:login' %}" class="dropdown-link">
+              Login
+            </a>
+          </li>
+          <li class="dropdown-item">
+            <a href="{% url 'accounts:register_user' %}" class="dropdown-link">
+              Register
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </li>
+      
+      </div>
+
+    </ul>
+  </div>
+</nav>
