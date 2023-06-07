@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+
+<!-- title -->
+{% block title %} Login {% endblock title %} 
+
+<!-- content -->
+{% block content_root %}
+
+<section class="form-wrapper d-flex justify-content-center align-items-center">
+  <div class="d-block mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <div class="h3 mb-3">Login to DIT Digital Library</div>
+
+        <form method="post">
+          {% csrf_token %}
+          {% for field in login_form %}
+          <div class="row row-cols-2 mb-3">
+            <div class="col">
+              <label for=""> {{ field.label }} </label>
+            </div>
+
+            <div class="col">
+              {{ field }}
+
+              <!-- errors -->
+              {% if field.errors %}
+              <div class="field-errors mt-2">
+                {% for error in field.errors %}
+                <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+
+          <button type="submit" class="btn btn-primary d-block mx-auto">
+            Login
+          </button>
+          <p>
+            Don't have an account yet?
+            <a href="{% url 'accounts:register_user' %}">Register an Account</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content_root %}
