@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.views import View
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib import auth
+from django.conf import settings
 
 from ..forms import RegisterUserForm
 
 
-User = get_user_model()
+User = auth.get_user_model()
 
 
 class RegisterUserView(View):
@@ -21,9 +23,35 @@ class RegisterUserView(View):
     def post(self, request, *args, **kwargs):
         register_form = self.form_class(request.POST)
         if register_form.is_valid():
-            user = User.objects.create(register_form.cleaned_data)
-            print("created user", user)
-            return redirect("/register_user")
+            cleaned_data = register_form.cleaned_data
 
+            # create user account
+            created_user = User.objects.create_user(
+                first_name=cleaned_data.get("first_name"),
+                last_name=cleaned_data.get("last_name"),
+                email=cleaned_data.get("email"),
+                password=cleaned_data.get("password2"),
+            )
+
+            if created_user:
+                # inform
+                messages.success(
+                    request,
+                    f"Congratulations {created_user.first_name}, your account created successfully",
+                )
+
+                # authenticate and login
+                auth.authenticate(
+                    request,
+                    email=cleaned_data.get("first_name"),
+                    password=cleaned_data.get("password2"),
+                )
+                auth.login(request, created_user)
+                return redirect(settings.LOGIN_REDIRECT)
+            else:
+                messages.info(request, "Account not created, please try again")
+                return redirect("accounts:register_user")
         else:
-            register_form = self.form_class
+            messages.error(request, "Please fill correctly")
+            register_form = self.form_class(request.POST)
+            return redirect("accounts:register_user")

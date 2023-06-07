@@ -14,9 +14,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _("user")
         verbose_name_plural = _("users")
 
-    id = models.CharField(
-        _("user ID"), max_length=20, unique=True, primary_key=True
-    )
+    id = models.CharField(_("user ID"), max_length=20, unique=True, primary_key=True)
     first_name = models.CharField(_("first name"), max_length=150, blank=False)
     middle_name = models.CharField(
         _("middle name"), max_length=150, null=True, blank=True

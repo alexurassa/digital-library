@@ -38,14 +38,8 @@ class RegisterUserForm(forms.ModelForm):
 
         email = self.cleaned_data["email"]
         if email and self._meta.model.objects.filter(email__exact=email).exists():
-            self.update_errors(
-                forms.ValidationError(
-                    {
-                        "email": self.instance.unique_error_messages(
-                            self._meta.model, ["email"]
-                        )
-                    }
-                )
+            raise forms.ValidationError(
+                f"User with email <{email}> already exists", code="unique"
             )
         else:
             return email

@@ -9,6 +9,6 @@ User = get_user_model()
 
 @receiver(pre_save, sender=User)
 def generateUserId(sender, instance, **kwargs):
-    if instance.id is None or instance.id == '':
+    if instance.id is None or instance.id == "":
         instance.id = UUIDGenerator.generate_string_token(length=20)
         instance.save()
