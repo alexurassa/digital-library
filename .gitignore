@@ -4,3 +4,5 @@
 /venv
 /src/media
 /src/static
+/.idea
+/.code

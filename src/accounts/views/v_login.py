@@ -3,12 +3,19 @@ from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.conf import settings
+from django.utils.decorators import method_decorator
 from ..forms import LoginForm
+
+from ..decorators import allowToLogin
 
 
 class LoginView(View):
     template_name = "auth/login.html"
     form_class = LoginForm
+
+    @method_decorator(allowToLogin)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
