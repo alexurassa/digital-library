@@ -1,5 +1,6 @@
+from django.utils import timezone
 from django.dispatch import receiver
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 
 from .models import *
 from .utils import generateInstanceId
@@ -18,3 +19,17 @@ def generateAuthorId(sender, instance, **kwargs):
 @receiver(signal=pre_save, sender=ResourceBorrow)
 def generateBorrowId(sender, instance, **kwargs):
     return generateInstanceId(instance, length=20)
+
+
+@receiver(signal=pre_save, sender=ResourceBorrow)
+def generateBorrowDateOfIssue(sender, instance, **kwargs):
+    if instance.issue_timestamp is None and instance.issue_confirmed:
+        instance.issue_timestamp = timezone.now()
+
+
+@receiver(signal=post_save, sender=ResourceBorrow)
+def changeBorrowStatus(created, sender, instance, **kwargs):
+    if not instance.is_returned:
+        instance.resource.is_borrowed = True
+    else:
+        instance.resource.is_borrowed = False
