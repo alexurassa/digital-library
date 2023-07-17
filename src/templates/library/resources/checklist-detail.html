@@ -1,0 +1,62 @@
+{% extends 'bases/sidenav.base.html' %}
+
+{% block title %}Checklist item detail{% endblock title %}
+
+{% block content_root %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row row-cols-md-2">
+                <div class="col">
+                    <h2 class="fw-lighter"> {{ resource.title }} </h2>
+                    <img src="{{ resource.frontCover }}" alt="{{ resource.title }}">
+                </div>
+                <div class="col">
+                    <section class="border-bottom mb-3">
+                        <h5 class="fw-lighter">General information</h5>
+                        <p>Publisher: {{ resource.publisher }} </p>
+                        <p>Registered timestamp: {{ resource.registered_timestamp }} </p>
+                        <p>Category: 
+                            {% if resource.category %}
+                            <span class="badge bg-success"> {{ resource.category.name }} </span>
+                            {% endif %} 
+                        </p>
+                        <p>
+                            Type:
+                            {% if resource.type %}
+                            <span class="badge bg-success">{{ resource.type.name }} </span> 
+                            {% endif %}
+                        </p>
+                    </section>
+                    <section class="border-bottom mb-3">
+                        <h5 class="fw-lighter">Authors</h5>
+                        {% if resource.authors.all.count != 0 %}
+                            <ul class="list-group">
+                                <li class="list-group-item border-none"></li>
+                            </ul>
+                            {% else %}
+                            <p>No author added for this resource yet.</p>
+                        {% endif %}
+                    </section>
+                    <section class="border-bottom mb-3">
+                        <h5 class="fw-lighter">Description</h5>
+                        <p> {{ resource.description }} </p>
+                    </section>
+                    <section>
+                        {% if not resource.is_borrowed %}
+                        <p> Resource is available to borrow </p>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Borrow now" class="btn btn-primary w-100 d-block rounded-pill">
+                        </form>
+                        {% else %}
+                        {% endif %}
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content_root %}

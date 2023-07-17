@@ -1,0 +1,40 @@
+{% extends 'bases/list-create.base.html' %}
+
+{% block title %}Borrowed Resources{% endblock title %}
+
+{% block table_section %}
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>user</th>
+                <th>resource</th>
+                <th>issue date</th>
+                <th>confirmed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrow in borrowed_resources %}
+            <tr>
+                <td> 
+                    <a href="{% url 'library:borrowed_resource_detail' borrow.pk %}" class="link-primary text-decoration-none"> {{ borrow.pk }} </a>
+                </td>
+                <td> {{ borrow.user.email }} </td>
+                <td> {{ borrow.resource.title }} </td>
+                <td> {{ borrow.issue_timestamp }} </td>
+                <td> 
+                    {% if borrow.issue_confirmed %}
+                    <span class="badge bg-success">Yes</span>
+                    {% else %}
+                    <span class="badge bg-danger">No</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock table_section %}

@@ -1,0 +1,14 @@
+{% extends 'bases/detail.base.html' %}
+
+{% block title %}Borrowed Resource Detail{% endblock title %}
+
+{% block edit_form %}
+
+{% include '../../form-field-renderer.html' %}
+
+{% endblock edit_form %}
+
+
+{% block delete_button %}
+<a href="{% url 'library:delete_borrowed_resource' borrowed_resource.pk %}" class="btn btn-danger btn-sm">Delete</a>
+{% endblock delete_button %}

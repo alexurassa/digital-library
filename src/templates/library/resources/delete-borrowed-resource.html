@@ -1,0 +1,7 @@
+{% extends 'bases/delete.base.html' %}
+
+{% block title %}Delete Borrow {% endblock title %}
+
+{% block back_button %}
+<a href="{% url 'library:borrowed_resources' %}" class="btn btn-secondary btn-sm">No, take me back!</a>
+{% endblock back_button %}
