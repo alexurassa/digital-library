@@ -1,0 +1,33 @@
+<section class="sidenav pe-1">
+  <ul class="list-group border-none">
+    <li class="list-group-item">
+      <a href="{% url 'library:resources_checklist' %}" class="link-primary">Resources checklist</a>
+    </li>
+    {% if request.user.is_staff or request.user.is_superuser %}
+      <li class="list-group-item">
+        <a href="{% url 'library:resources' %}" class="link-primary">Resources</a>
+      </li>
+      <li class="list-group-item">
+        <a href="{% url 'accounts:users' %}" class="link-primary">Library users</a>
+      </li>
+      <li class="list-group-item">
+        <a href="{% url 'library:authors_list_create' %}" class="link-primary">Authors</a>
+      </li>
+      <li class="list-group-item">
+        <a href="{% url 'library:resource_categories' %}" class="link-primary"
+          >Resource categories</a
+        >
+      </li>
+      <li class="list-group-item">
+        <a href="{% url 'library:resource_types' %}" class="link-primary"
+          >Resource Types</a
+        >
+      </li>
+      <li class="list-group-item">
+        <a href="{% url 'library:borrowed_resources' %}" class="link-primary"
+          >Borrowed Resources</a
+        >
+      </li>
+    {% endif %}
+  </ul>
+</section>

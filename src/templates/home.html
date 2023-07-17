@@ -1,1 +1,13 @@
 {% extends "index.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block page_outlet %}
+
+<div class="container">
+    <h3 class="fw-light text-center">Welcome to <strong>DIT</strong> Digital library (DIT-DL)</h3>
+
+    <a href="{% url 'library:resources_checklist' %}" class="btn btn-success rounded-pill d-block mx-auto">View available Resources</a>
+</div>
+
+{% endblock page_outlet %}

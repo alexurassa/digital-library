@@ -1,0 +1,70 @@
+{% extends 'bases/sidenav.base.html' %}
+<!---->
+{% block title %}{% endblock title %}
+<!---->
+{% block content_root %}
+<div class="border-bottom border-dark-subtle pb-2 d-flex">
+  <div class="ms-auto me-0">
+      {% if 'library.add_resource' in request.user.get_all_permissions %}
+        <button
+        type="button"
+        role="button"
+        class="btn btn-primary shadow-none"
+        aria-label="Add"
+        data-bs-toggle="modal"
+        data-bs-target="#add-modal"
+        aria-haspopup="dialog"
+      >
+        Add
+      </button>
+
+      <!-- modal -->
+      <div class="modal fade" id="add-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl" id="add-modal">
+          <div class="modal-content">
+            <form method="post">
+              <div class="modal-header">
+                <h5 class="modal-title" id="Label"></h5>
+                <button
+                  type="button"
+                  class="btn-close shadow-none"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                {% csrf_token %}
+
+                <!-- form -->
+                {% block add_form_section %}{% endblock add_form_section %}
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="reset"
+                  class="btn btn-danger"
+                >
+                  Reset
+                </button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+</div>
+
+{% block table_section %}{% endblock table_section %}
+
+<!-- end table -->
+
+{% endblock content_root %}

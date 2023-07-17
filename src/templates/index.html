@@ -8,20 +8,14 @@
 
     {% include "styles.html" %}
 
-    <title>{% block title %} {% endblock title %}</title>
+    <title>{% block title %} {% endblock title %} | DIT-DL</title>
   </head>
   <body>
     <section class="page-root vh-100">
       <header>{% include 'navbar.html' %}</header>
 
-      <!-- content root -->
-      <section class="main-content-root min-vh-100 container-fluid mt-5 pt-5">
-        {% block content_root %} {% endblock content_root %}
-      </section>
-
-      <!-- footer -->
-      <section class="footer-section">
-        {% include 'footer.html' %}
+      <section class="min-vh-100 container-fluid mt-5 pt-5">
+        {% block page_outlet %}{% endblock page_outlet %}
       </section>
 
       <!-- messages -->

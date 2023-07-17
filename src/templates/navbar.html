@@ -2,7 +2,9 @@
   class="navbar navbar-expand-sm fixed-top top-0 border-bottom border-dark-subtle shadow shadow-sm px-3 bg-white"
   id="app-navbar"
 >
-  <div class="navbar-brand">Digital Library</div>
+  <div class="navbar-brand">
+    <a href="{% url 'shared:homepage' %}" class="text-decoration-none text-dark">Digital Library</a>
+  </div>
 
   <button
     class="navbar-toggler"
@@ -17,7 +19,7 @@
   <div class="collapse navbar-collapse" id="main-navbar">
     <ul class="navbar-nav ms-auto me-3">
       <li class="nav-item ms-3">Books</li>
-      <li class="nav-item ms-3 dropdown-center">
+      <li class="nav-item ms-3 dropstart">
         <span
           class="dropdown-toggle"
           data-bs-toggle="dropdown"
@@ -27,6 +29,7 @@
         >
         <ul class="dropdown-menu">
           {% if request.user.is_authenticated %}
+          <li class="dropdown-header"> {{ request.user.email }} </li>
           <div class="dropdown-divider"></div>
           <li class="dropdown-item">
             <a href="{% url 'accounts:logout' %}" class="dropdown-link">

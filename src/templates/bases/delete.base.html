@@ -1,0 +1,25 @@
+{% extends './sidenav.base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block content_root %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="fw-light">Are you sure?</h4>
+        </div>
+        <div class="card-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>Want to delete&colon; {{ object }} </p>
+                <div class="card-footer">
+                    <input type="submit" class="btn btn-sm btn-danger" value="Delete"></input>
+                    {% block back_button %}{% endblock back_button %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content_root %}

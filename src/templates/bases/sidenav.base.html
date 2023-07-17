@@ -1,0 +1,22 @@
+{% extends '../index.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block page_outlet %}
+
+    <section class="d-flex">
+        <div class="flex-column sidenav-section min-vh-100">{% include 'sidenav.html' %}</div>
+
+        <div class="flex-column w-100">
+            <!-- content root -->
+            <section class="main-content-root container-fluid">
+            {% block content_root %} {% endblock content_root %}
+            </section>
+
+            <!-- footer -->
+            <section class="footer-section">{% include 'footer.html' %}</section>
+        </div>
+    </section>
+
+{% endblock page_outlet %}
+
