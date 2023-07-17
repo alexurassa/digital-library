@@ -1,0 +1,37 @@
+{% extends 'bases/list-create.base.html' %}
+
+{% block title %} Users {% endblock title %}
+
+{% block add_form_section %}
+    {% include "../../form-field-renderer.html" %}
+{% endblock add_form_section %}
+
+
+{% block table_section %}
+    <section class="table-container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Active</th>
+                    <th>Staff</th>
+                    <th>Superuser</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td> {{ user.first_name }} </td>
+                    <td> {{ user.last_name }} </td>
+                    <td> {{ user.email }} </td>
+                    <td> {{ user.is_active }} </td>
+                    <td> {{ user.is_staff }} </td>
+                    <td> {{ user.is_superuser }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock table_section %}
