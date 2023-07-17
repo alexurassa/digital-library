@@ -3,8 +3,9 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from shared.mixins import CustomIdModelMixin
-from .author import Author
 from .resource_category import ResourceCategory
+from .author import Author
+from .resource_type import ResourceType
 
 
 class Resource(CustomIdModelMixin):
@@ -34,6 +35,8 @@ class Resource(CustomIdModelMixin):
     description = models.TextField(
         _("description"), null=True, blank=True, max_length=999
     )
+    type = models.ForeignKey(to=ResourceType, on_delete=models.SET_NULL, null=True)
+    is_borrowed = models.BooleanField(_("borrowed?"), default=False)
 
     def __str__(self) -> str:
         return self.title
