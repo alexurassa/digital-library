@@ -1,0 +1,52 @@
+{% extends 'bases/list-create.base.html' %}
+
+{% block title %}Resources{% endblock title %}
+
+{% block add_form_section %}
+
+    {% for field in resource_form %}
+    <div class="row row-cols-2">
+        <div class="col"> {{ field.label_tag }} </div>
+        <div class="col"> {{ field }} </div>
+    </div>
+    {% endfor %}
+
+{% endblock add_form_section %}
+
+{% block table_section %}
+
+    <div class="table-container">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>publisher</th>
+                    <th>category</th>
+                    <th>date registered</th>
+                    <th>actiion</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for resource in resources %}
+                <tr>
+                    <td> 
+                        <a href="{% url 'library:resource_detail' resource.pk %}" class="d-inline-flex align-items-center">
+                            <!-- <img src="{{ resource.frontCover }}" alt="{{ resource.title }}" class="me-2 my-0 tr-img"> -->
+                            <span>{{ resource.title }} </span>
+                        </a>
+                    </td>
+                    <td> {{ resource.publisher }} </td>
+                    <td> {{ resource.category.name }} </td>
+                    <td> {{ resource.registered_timestamp }} </td>
+                    <td>
+                        <a href="{% url 'library:delete_resource' resource.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock table_section %}
+    

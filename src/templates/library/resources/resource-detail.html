@@ -1,0 +1,20 @@
+
+{% extends 'bases/detail.base.html' %}
+
+{% block title %}Resource Detail{% endblock title %}
+
+{% block page_header %}Update Resource Details{% endblock page_header %}
+
+{% if request.user.is_staff or request.user.is_superuser %}
+
+    {% block edit_multipart_form %}
+
+    {% include '../../form-field-renderer.html' %}
+
+    {% endblock edit_multipart_form %}
+
+{% endif %}
+
+{% block multipart_delete_btn %}
+<a href="{% url 'library:delete_resource' resource.pk %}" class="btn btn-danger btn-sm">Delete</a>
+{% endblock multipart_delete_btn %}
