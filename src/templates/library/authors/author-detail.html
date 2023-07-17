@@ -1,0 +1,16 @@
+{% extends 'bases/detail.base.html' %}
+
+{% block title %}Author Detail{% endblock title %}
+
+{% block page_header %}Update Author Details{% endblock page_header %}
+
+{% block edit_form %}
+
+{% include '../../form-field-renderer.html' %}
+
+{% endblock edit_form %}
+
+
+{% block delete_button %}
+    <a href="{% url 'library:delete_author' author.pk %}" class="btn btn-sm btn-danger">Delete</a>
+{% endblock delete_button %}

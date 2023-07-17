@@ -1,0 +1,40 @@
+{% extends 'bases/list-create.base.html' %}
+
+{% block title %}Authors{% endblock title %}
+
+{% block add_form_section %}
+
+{% include '../../form-field-renderer.html' %}
+
+{% endblock add_form_section %}
+
+
+{% block table_section %}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>full name</th>
+                <th>email</th>
+                <th>address</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+            <tr>
+                <td><a href="{% url 'library:author_detail' author.id %}" class="link-primary"> {{ author.full_name}} </a></td>
+                <td> {{ author.email }} </td>
+                <td> {{ author.address }} </td>
+                <td>
+                    <a href="{% url 'library:delete_author' author.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock table_section %}
+

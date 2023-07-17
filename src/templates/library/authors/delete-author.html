@@ -1,0 +1,7 @@
+{% extends 'bases/delete.base.html' %}
+
+{% block title %}Delete Author{% endblock title %}
+
+{% block back_button %}
+<a href="{% url 'library:authors_list_create' %}" class="btn btn-sm btn-secondary">Not now</a>
+{% endblock back_button %}
