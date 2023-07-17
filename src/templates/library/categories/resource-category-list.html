@@ -1,0 +1,42 @@
+{% extends 'bases/list-create.base.html' %}
+
+{% block title %}Resource Categories{% endblock title %}
+
+{% block add_form_section %}
+
+    {% for field in category_form %}
+    <div class="row row-cols-2">
+        <div class="col"> {{ field.label_tag }} </div>
+        <div class="col"> {{ field }} </div>
+    </div>
+    {% endfor %}
+
+{% endblock add_form_section %}
+
+{% block table_section %}
+
+    <div class="table-container">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td> 
+                        <a href="{% url 'library:resource_category_detail' category.id %}"> {{ category.name }} </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'library:delete_resource_category' category.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock table_section %}
