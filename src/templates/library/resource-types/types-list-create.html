@@ -1,0 +1,37 @@
+{% extends 'bases/list-create.base.html' %}
+
+{% block title %}Resource Types{% endblock title %}
+
+{% block add_form_section %}
+
+    {% include '../../form-field-renderer.html' %}
+
+{% endblock add_form_section %}
+
+{% block table_section %}
+
+    <div class="table-container">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>type name</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for type in resource_types %}
+                <tr>
+                    <td> 
+                        <a href="{% url 'library:resource_type_detail' type.pk %}"> {{ type.name }} </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'library:delete_resource_type' type.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock table_section %}

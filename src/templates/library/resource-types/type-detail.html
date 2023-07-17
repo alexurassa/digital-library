@@ -1,0 +1,19 @@
+{% extends '../../bases/detail.base.html' %}
+
+{% block title %}Resource Type Detail{% endblock title %}
+
+
+{% block page_header %}Update Resource Type details{% endblock page_header %}
+
+{% block edit_form %}
+
+{% include '../../form-field-renderer.html' %}
+
+
+{% endblock edit_form %}
+
+{% block delete_button %}
+
+<a href="{% url 'library:delete_resource_type' resource_type.pk %}" class="btn btn-danger btn-sm">Delete</a>
+
+{% endblock delete_button %}
